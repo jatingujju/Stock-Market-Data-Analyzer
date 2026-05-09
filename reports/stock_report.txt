@@ -16,6 +16,8 @@ Average Daily Return :
 
 Observations:
 - Moving averages help identify trends.
+- RSI identifies overbought and oversold conditions.
+- MACD helps detect trend momentum.
 - Volatility indicates stock risk.
 - Daily returns show stock performance.
 

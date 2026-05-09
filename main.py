@@ -1,4 +1,6 @@
 from ta.momentum import RSIIndicator
+from ta.trend import MACD
+
 import matplotlib
 matplotlib.use('TkAgg')
 
@@ -70,14 +72,42 @@ rsi = RSIIndicator(close=data['Close'])
 data['RSI'] = rsi.rsi()
 
 # -------------------------------
+# MACD CALCULATION
+# -------------------------------
+
+macd = MACD(close=data['Close'])
+
+data['MACD'] = macd.macd()
+
+data['MACD_Signal'] = macd.macd_signal()
+
+data['MACD_Histogram'] = macd.macd_diff()
+
+# -------------------------------
 # VOLATILITY
 # -------------------------------
 
 volatility = data['Daily_Return'].std()
 
+# -------------------------------
+# RSI OUTPUT
+# -------------------------------
+
 print("\n========== RSI VALUES ==========")
 
 print(data[['Date', 'Close', 'RSI']].tail())
+
+# -------------------------------
+# MACD OUTPUT
+# -------------------------------
+
+print("\n========== MACD VALUES ==========")
+
+print(
+    data[
+        ['Date', 'MACD', 'MACD_Signal']
+    ].tail()
+)
 
 # -------------------------------
 # HIGHEST & LOWEST PRICE
@@ -240,6 +270,49 @@ plt.savefig("images/rsi_analysis.png")
 plt.show()
 
 # -------------------------------
+# MACD VISUALIZATION
+# -------------------------------
+
+plt.figure(figsize=(12,6))
+
+# MACD Line
+plt.plot(
+    data['Date'],
+    data['MACD'],
+    label='MACD'
+)
+
+# Signal Line
+plt.plot(
+    data['Date'],
+    data['MACD_Signal'],
+    label='Signal Line'
+)
+
+# Histogram
+plt.bar(
+    data['Date'],
+    data['MACD_Histogram'],
+    label='Histogram'
+)
+
+plt.title(f"{ticker} MACD Analysis")
+
+plt.xlabel("Date")
+
+plt.ylabel("MACD")
+
+plt.legend()
+
+plt.grid(True)
+
+plt.tight_layout()
+
+plt.savefig("images/macd_analysis.png")
+
+plt.show()
+
+# -------------------------------
 # FINAL REPORT GENERATION
 # -------------------------------
 
@@ -261,6 +334,8 @@ Average Daily Return :
 
 Observations:
 - Moving averages help identify trends.
+- RSI identifies overbought and oversold conditions.
+- MACD helps detect trend momentum.
 - Volatility indicates stock risk.
 - Daily returns show stock performance.
 
