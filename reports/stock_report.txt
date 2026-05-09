@@ -1,0 +1,22 @@
+
+=================================
+      STOCK ANALYSIS REPORT
+=================================
+
+Ticker Symbol : AAPL
+
+Highest Price : 197.57
+
+Lowest Price  : 122.21
+
+Volatility    : 0.01257
+
+Average Daily Return :
+0.00183
+
+Observations:
+- Moving averages help identify trends.
+- Volatility indicates stock risk.
+- Daily returns show stock performance.
+
+=================================
